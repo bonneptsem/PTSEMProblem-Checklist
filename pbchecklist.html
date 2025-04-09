@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Problem Statement Checklist</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 20px auto;
+      line-height: 1.6;
+      padding: 10px;
+    }
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    h2 {
+      color: #333;
+    }
+    h3 {
+      margin-top: 20px;
+      color: #555;
+    }
+    .checklist-item {
+      margin-bottom: 8px;
+      font-size: 1.1em;
+    }
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: #800020; /* burgundy */
+      margin-right: 10px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #score-result {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    .high {
+      color: green;
+    }
+    .medium {
+      color: orange;
+    }
+    .low {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Problem Statement Checklist</h2>
+
+  <label for="problem-statement"><strong>Enter your Problem Statement:</strong></label><br/>
+  <textarea id="problem-statement" rows="5"></textarea>
+
+  <h3>Checklist:</h3>
+  <form id="checklist">
+    <div class="checklist-item"><input type="checkbox"> Is the issue specific and well-defined?</div>
+    <div class="checklist-item"><input type="checkbox"> Is it clear and to the point? Do you avoid unnecessary jargon or overly complex language?</div>
+    <div class="checklist-item"><input type="checkbox"> Does the statement focus on one primary problem instead of multiple issues?</div>
+    <div class="checklist-item"><input type="checkbox"> Do you describe the setting or circumstances where the problem occurs?</div>
+    <div class="checklist-item"><input type="checkbox"> Do you mention relevant statistics or data to illustrate the scope of the issue?</div>
+    <div class="checklist-item"><input type="checkbox"> Have you included a brief, human-centered story or example that puts a face to the problem?</div>
+    <div class="checklist-item"><input type="checkbox"> Have you explained the potential consequences of not addressing the problem?</div>
+    <div class="checklist-item"><input type="checkbox"> Does the statement convey why this issue requires immediate attention?</div>
+    <div class="checklist-item"><input type="checkbox"> Have you tailored the problem to align with the audience’s priorities?</div>
+    <div class="checklist-item"><input type="checkbox"> Does the problem statement lead naturally to the solution and ask?</div>
+    <div class="checklist-item"><input type="checkbox"> Would someone unfamiliar with the issue immediately understand its significance?</div>
+    <div class="checklist-item"><input type="checkbox"> Does it evoke a sense of concern or urgency in the listener?</div>
+  </form>
+
+  <button onclick="calculateScore()">Calculate Score</button>
+
+  <p id="score-result"></p>
+  <p id="feedback"></p>
+
+  <script>
+    function calculateScore() {
+      const checklist = document.querySelectorAll('#checklist input[type=checkbox]');
+      let score = 0;
+      checklist.forEach(checkbox => {
+        if (checkbox.checked) score++;
+      });
+      const total = checklist.length;
+      const percent = Math.round((score / total) * 100);
+      const scoreResult = document.getElementById('score-result');
+      const feedback = document.getElementById('feedback');
+
+      scoreResult.innerText = `Your Score: ${percent}% (${score}/${total})`;
+
+      if (percent >= 80) {
+        feedback.innerText = "Great job! Your problem statement is strong and compelling.";
+        feedback.className = "high";
+      } else if (percent >= 70) {
+        feedback.innerText = "You're getting there! Consider revising a few parts to sharpen the focus and clarity.";
+        feedback.className = "medium";
+      } else {
+        feedback.innerText = "Consider revisiting key elements. Try to clarify the core issue and include supporting details.";
+        feedback.className = "low";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+
